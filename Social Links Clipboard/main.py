@@ -1,47 +1,34 @@
 
 import PySimpleGUI as sg
-
 import pyperclip
-import webbrowser
-
-
-def create(detectedCodeList,headings):
-    code_detected_table_window_layout = [
-        [sg.Table(values=detectedCodeList, headings= headings, auto_size_columns=True, justification="center",
-                max_col_width=500,
-                enable_events=True, key='OUTPUT'),sg.InputText("", use_readonly_for_disable=True, disabled=True, key='CODE_STRING'),sg.Button("Copy"),sg.Button("Redeem")],
-    ]
-
-    code_detected_table_window = sg.Window("Detected Code List Table", code_detected_table_window_layout, element_justification='center',modal=True)
-
-    while True:
-        event, values = code_detected_table_window.read()
-        if event == 'OUTPUT':
-            code_selected = [detectedCodeList[row] for row in values[event]]
-            print(code_selected[0])
-            code_detected_table_window['CODE_STRING'].update(code_selected[0])
-        if event == 'Copy':
-            pyperclip.copy(str(code_detected_table_window['CODE_STRING'].get()))
-
-        
-        if event == sg.WINDOW_CLOSED or event == "Exit":
-            break
-    code_detected_table_window.close()
-
-detectedCodeList = []
-headings=["Code detected"]
 
 # gui layout
 layout = [
-    [sg.Text("YouTube Link:"), sg.Input(key="URL")],
-    [sg.Button("Detect"), sg.Exit()],
-
+    [sg.Text("LinkedIn:"), sg.Input("https://www.linkedin.com/in/andrewfungkinho/",key="linkedinURL"),sg.Button("Copy LinkedIn")],
+    [sg.Text("YouTube:"), sg.Input("https://www.youtube.com/AndrewFungKinHo",key="youtubeURL"),sg.Button("Copy YouTube")],
+    [sg.Text("Website:"), sg.Input("https://andrew-fungkinho.github.io/",key="websiteURL"),sg.Button("Copy Website")],
+    [sg.Text("GitHub:"), sg.Input("https://github.com/Andrew-FungKinHo",key="githubURL"),sg.Button("Copy GitHub")],
+    [sg.Text("Twitter:"), sg.Input("https://twitter.com/AndrewFungKinHo",key="twitterURL"),sg.Button("Copy Twitter")],
+    [sg.Exit()]
 ]
 window = sg.Window("Social Media Links Clipboard", layout, element_justification='center')
 
 while True:
     event, values = window.read()
+    if event == 'Copy LinkedIn':
+        pyperclip.copy(values["linkedinURL"])
+    if event == 'Copy YouTube':
+        pyperclip.copy(values["youtubeURL"])
+    if event == 'Copy Website':
+        pyperclip.copy(values["websiteURL"])
+    if event == 'Copy GitHub':
+        pyperclip.copy(values["githubURL"])
+    if event == 'Copy Twitter':
+        pyperclip.copy(values["twitterURL"])
+
     if event == sg.WINDOW_CLOSED or event == "Exit":
         break
 
+
 window.close() 
+
