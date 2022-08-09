@@ -9,6 +9,9 @@ layout = [
     [sg.Text("Website:"), sg.Input("https://andrew-fungkinho.github.io/",key="websiteURL"),sg.Button("Copy Website")],
     [sg.Text("GitHub:"), sg.Input("https://github.com/Andrew-FungKinHo",key="githubURL"),sg.Button("Copy GitHub")],
     [sg.Text("Twitter:"), sg.Input("https://twitter.com/AndrewFungKinHo",key="twitterURL"),sg.Button("Copy Twitter")],
+    [sg.Text("Phone:"), sg.Input("+1 647 495-8038",key="phone"),sg.Button("Copy Phone")],
+    [sg.Text("Address:"), sg.Input("2 Myron St, Stouffville, ON",key="address"),sg.Button("Copy Address")],
+    [sg.Text("Postal:"), sg.Input("L4A 0M1",key="postal"),sg.Button("Copy Postal")],
     [sg.Exit()]
 ]
 window = sg.Window("Social Media Links Clipboard", layout, element_justification='center')
@@ -25,6 +28,12 @@ while True:
         pyperclip.copy(values["githubURL"])
     if event == 'Copy Twitter':
         pyperclip.copy(values["twitterURL"])
+    if event == 'Copy Phone':
+        pyperclip.copy(values["phone"])
+    if event == 'Copy Address':
+        pyperclip.copy(values["address"])
+    if event == 'Copy Postal':
+        pyperclip.copy(values["postal"])
 
     if event == sg.WINDOW_CLOSED or event == "Exit":
         break
